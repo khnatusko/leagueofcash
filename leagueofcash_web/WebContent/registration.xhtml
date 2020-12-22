@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:composition template="/templates/register-template.xhtml">
+
+	<ui:define name="content">
+
+		<h:form>
+		<p:panel header="Rejestracja" style="margin: 1em auto;">
+			<h:panelGrid columns="2" cellpadding="5" styleClass="bottom-space">
+			<h:outputLabel for="nick" value="Nick:" />
+				<h:inputText id="nick" value=""
+					required="true"	requiredMessage="podaj nick"/>
+					
+					<h:outputLabel for="position" value="Pozycja:" />
+				<h:inputText id="position" value=""
+					required="true"	requiredMessage="podaj pozycje"/>
+					
+					<h:outputLabel for="name" value="Name:" />
+				<h:inputText id="name" value=""
+					required="true"	requiredMessage="podaj imię"/>
+			
+			<h:outputLabel for="lastname" value="LastName:" />
+				<h:inputText id="lastname" value=""
+					required="true"	requiredMessage="podaj nazwisko"/>
+			
+				<h:outputLabel for="login" value="login:" />
+				<h:inputText id="login" value="#{loginBB.login}"
+					required="true"	requiredMessage="podaj login"/>
+				<h:outputLabel for="password" value="hasło:" />
+				<h:inputSecret id="password" value="#{loginBB.password}"
+				required="true"	requiredMessage="podaj hasło"/>
+				
+				<h:outputLabel for="rola" value="Rola" />
+				<h:inputText id="rola" value=""
+					required="true"	requiredMessage="podaj rolę"/>
+			</h:panelGrid>
+		</p:panel>
+			<h:messages />
+			<h:commandButton value="Zarejestruj" action="#" update="msg" />
+			
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+</html>
