@@ -25,6 +25,16 @@ public class LoginBB {
 
 	private String login;
 	private String password;
+	private String Rola;
+
+	
+	public String getRola() {
+		return Rola;
+	}
+
+	public void setRola(String rola) {
+		this.Rola = rola;
+	}
 
 	public String getLogin() {
 		return login;

@@ -20,10 +20,10 @@
 			<param-value>
 /javax.faces.resource : PUBLIC;
 /public : PUBLIC;
-/index.xhtml : user;
-/teams.xhtml : user;
-/leagues.xhtml : user;
-/registration.xhtml : user;
+/index.xhtml : user, admin;
+/teams.xhtml : user, admin;
+/leagues.xhtml : user, admin;
+/registration.xhtml : user, admin;
 			</param-value>
 		</init-param>
 		<init-param>
@@ -52,6 +52,10 @@
 		<param-name>primefaces.THEME</param-name>
 		<param-value>nova-light</param-value>
 	</context-param>
+	<session-config>
+		<session-timeout>1</session-timeout>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

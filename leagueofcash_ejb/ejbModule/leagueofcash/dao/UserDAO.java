@@ -6,7 +6,10 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.faces.bean.NoneScoped;
 
 
@@ -40,30 +43,30 @@ public class UserDAO {
 	
 public User getUserFromDatabase(String login, String password) {
 		
-		User u = null;
-		
-		if (login.equals("user1") && password.equals("password")) {
-			u = new User();
-			u.setLogin(login);
-			u.setPassword(password);
-			u.setName("Jan");
-			u.setLast_Name("Kowalski");
-		}
-
-		return u;
+	Query query = em.createQuery("SELECT u FROM User u WHERE u.login = :login and u.password = :password",User.class);
+    query.setParameter("login", login);
+    query.setParameter("password", password);  
+try {	
+	return(User)query.getSingleResult();
+	
+} catch(NoResultException e) {
+	return null;
+}
+	
+    
 }
 
 public List<String> getUserRolesFromDatabase(User user) {
 		
 		ArrayList<String> roles = new ArrayList<String>();
 		
-		if (user.getLogin().equals("user1")) {
+		if (user.getRola().equals("user")) {
 			roles.add("user");
 		}
-		if (user.getLogin().equals("user2")) {
+		if (user.getRola().equals("admin")) {
 			roles.add("admin");
 		}
-		
+	
 		return roles;
 	}
 	
