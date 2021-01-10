@@ -12,8 +12,7 @@
     	<p:menuitem value="Zespoły" url="teams.xhtml" />
     	<p:menuitem value="Ligi" url="leagues.xhtml" />
     	<p:menuitem value="Płatności" url="#" />
-    	<p:menuitem value="Zaloguj" url="login.xhtml" />
-    	<p:menuitem value="Zarejestruj" url="registration.xhtml" />
+    	<p:menuitem value="Lista zawodników" url="list.xhtml" />
 	</p:breadCrumb>
 	<h:outputText value="Zalogowany: #{remoteClient.details.name} #{remoteClient.details.last_Name}" /><br/>
 	<h:commandButton value="Wyloguj" action="#{loginBB.doLogout()}" />

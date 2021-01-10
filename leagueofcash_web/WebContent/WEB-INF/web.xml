@@ -24,6 +24,7 @@
 /teams.xhtml : user, admin;
 /leagues.xhtml : user, admin;
 /registration.xhtml : user, admin;
+/list.xhtml: user, admin;
 			</param-value>
 		</init-param>
 		<init-param>

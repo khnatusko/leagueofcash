@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:composition template="/templates/register-template.xhtml">
+
+	<ui:define name="content">
+		
+		<h:form>
+		<p:commandButton value="Dodaj nową osobę"
+			action="#" style="margin-bottom:1em;"/>
+		<p:dataTable value="#" var="p">
+
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="imię" />
+				</f:facet>
+				<h:outputText value="#" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="nazwisko" />
+				</f:facet>
+				<h:outputText value="#" >
+				</h:outputText>
+			</p:column>
+
+			<p:column priority="4">
+				<f:facet name="header">
+					<h:outputText value="data ur." />
+				</f:facet>
+				<h:outputText value="" >
+					<f:convertDateTime pattern="dd-MM-yyyy" />
+				</h:outputText>
+			</p:column>
+
+		</p:dataTable>	
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+</html>
