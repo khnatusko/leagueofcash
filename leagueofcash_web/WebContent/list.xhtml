@@ -8,41 +8,24 @@
 	
 <ui:composition template="/templates/register-template.xhtml">
 
+
+
 	<ui:define name="content">
-		
 		<h:form>
-		<p:commandButton value="Dodaj nową osobę"
-			action="#" style="margin-bottom:1em;"/>
-		<p:dataTable value="#" var="p">
-
-			<p:column priority="5">
-				<f:facet name="header">
-					<h:outputText value="imię" />
-				</f:facet>
-				<h:outputText value="#" />
-			</p:column>
-
-			<p:column>
-				<f:facet name="header">
-					<h:outputText value="nazwisko" />
-				</f:facet>
-				<h:outputText value="#" >
-				</h:outputText>
-			</p:column>
-
-			<p:column priority="4">
-				<f:facet name="header">
-					<h:outputText value="data ur." />
-				</f:facet>
-				<h:outputText value="" >
-					<f:convertDateTime pattern="dd-MM-yyyy" />
-				</h:outputText>
-			</p:column>
-
-		</p:dataTable>	
+		<p:panel header="Opcje wyszukiwania" 
+		style="margin-bottom: 1em;">
+		
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel value="nazwisko:" />
+				<p:inputText value="#{UserEdit.last_Name}" />
+				<p:commandButton value="Szukaj" />
+			</h:panelGrid>
+			</p:panel>
 		</h:form>
-
-	</ui:define>
+		<h:form>
+	<p:commandButton value="Dodaj nowego użytkownika" action="#{UserEdit.newUser()}"/>
+	</h:form>
+</ui:define>	
 
 </ui:composition>
 </html>

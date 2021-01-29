@@ -2,7 +2,7 @@ package leagueofcash.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -10,6 +10,9 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+
+
+
 import javax.faces.bean.NoneScoped;
 
 
@@ -69,6 +72,64 @@ public List<String> getUserRolesFromDatabase(User user) {
 	
 		return roles;
 	}
+
+public List<User> getFullList() {
+	List<User> list = null;
+
+	Query query = em.createQuery("select u from User u");
+
+	try {
+		list = query.getResultList();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+
+	return list;
+}
+
+
+public List<User> getList(Map<String, Object> searchParams) {
+	List<User> list = null;
+
+	// 1. Build query string with parameters
+	String select = "select u ";
+	String from = "from User u ";
+	String where = "";
+	String orderby = "order by u.last_Name asc, u.name";
+
+	// search for surname
+	String last_Name = (String) searchParams.get("last_Name");
+	if (last_Name != null) {
+		if (where.isEmpty()) {
+			where = "where ";
+		} else {
+			where += "and ";
+		}
+		where += "u.last_Name like :last_Name ";
+	}
 	
+	// ... other parameters ... 
+
+	// 2. Create query object
+	Query query = em.createQuery(select + from + where + orderby);
+
+	// 3. Set configured parameters
+	if (last_Name != null) {
+		query.setParameter("last_Name", last_Name+"%");
+	}
+
+	// ... other parameters ... 
+
+	// 4. Execute query and retrieve list of Person objects
+	try {
+		list = query.getResultList();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+
+	return list;
+}
+
+
 	
 }

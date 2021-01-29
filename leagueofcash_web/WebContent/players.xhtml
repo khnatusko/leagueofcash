@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Lista</title>
+</head>
+<ui:composition template="/templates/list-template.xhtml">
+<ui:define name="content">
+<h:form>
+<p:panel header="Opcje wyszukiwania" 
+		style="margin-bottom: 1em;">
+		
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel value="Nazwisko:" />
+				<p:inputText value="#{PaginatorView.last_Name}" />
+				<p:commandButton value="Szukaj" />
+			</h:panelGrid>
+			</p:panel>
+</h:form>
+    <h:form>
+        <p:dataTable var="u" value="#{PaginatorView.list}" rows="10"
+                     paginator="true"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                     rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+
+            <p:column headerText="Name">
+                <h:outputText value="#{u.name}" />
+            </p:column>
+
+            <p:column headerText="Last Name">
+                <h:outputText value="#{u.last_Name}" />
+            </p:column>
+
+            <p:column headerText="Nick">
+                <h:outputText value="#{u.nick}" />
+            </p:column>
+
+            <p:column headerText="Position">
+                <h:outputText value="#{u.position}" />
+            </p:column>
+            
+
+            <f:facet name="paginatorTopLeft">
+                <p:commandButton type="button" icon="pi pi-refresh"/>
+            </f:facet>
+
+            <f:facet name="paginatorBottomRight">
+                <p:commandButton type="button" icon="pi pi-cloud-upload"/>
+            </f:facet>
+
+        </p:dataTable>
+    </h:form>
+</ui:define>
+</ui:composition>
+</html>
