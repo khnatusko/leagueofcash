@@ -4,10 +4,12 @@ package leagueofcash.dao;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-
+import javax.persistence.Query;
 
 import leagueofcash.entities.Team;
+import leagueofcash.entities.User;
 
 
 
@@ -35,6 +37,8 @@ public class TeamDAO {
 		return em.find(Team.class, id);
 	}
 
+	
+	
 	
 }
 

@@ -26,7 +26,7 @@ public class LoginBB {
 	private String login;
 	private String password;
 	private String Rola;
-
+	private boolean visible;
 	
 	public String getRola() {
 		return Rola;
@@ -69,19 +69,21 @@ public class LoginBB {
 		RemoteClient<User> client = new RemoteClient<User>(); 
 		client.setDetails(user);
 		
-		List<String> roles = userDAO.getUserRolesFromDatabase(user); 
 		
-		if (roles != null) { 
-			for (String role: roles) {
-				client.getRoles().add(role);
-			}
+		
+		if (user.getRola() != null) { 
+			
+				client.getRoles().add(user.getRola());
+			
 		}
-
+		
 		HttpServletRequest request = (HttpServletRequest) ctx.getExternalContext().getRequest();
 		client.store(request);
 
 		return PAGE_MAIN;
 	}
+	
+	
 	
 	public String doLogout(){
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
@@ -89,6 +91,11 @@ public class LoginBB {
 		
 		session.invalidate();
 		return PAGE_LOGIN;
+	}
+	
+	public void hide() {
+		
+		visible=false;
 	}
 	
 }

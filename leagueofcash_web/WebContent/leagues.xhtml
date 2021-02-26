@@ -18,9 +18,12 @@ SuperLiga LVP, wcześniej znany jako División de Honor ( DDH ), jest jednym z n
 <p:panel header="LFL French" style="margin: 1em auto;">
 LFL to jedna z największych lig regionalnych w Europie. Osiem drużyn rywalizuje w fazie grupowej robin z podwójną rundą, a 5 najlepszych drużyn kontynuuje play-off. W niektóre francuskie zespoły zaangażowane są zespoły piłkarskie takie jak Olympic Lyon czy kiedyś PSG. Z ligi francuskiej pochodzi aktualny zwyciężca EUMasters, czyli ekipa LDLC
 </p:panel>
-
-
-
+<h:form>
+<p:commandButton value="Dodaj ligę" action="Addleague?faces-redirect=true"  />
+<p:commandButton value="Dodaj drużynę" action="Addteam?faces-redirect=true"  />
+<p:commandButton value="Edytuj użytkownika" action="Editview?faces-redirect=true" />
+<p:commandButton value="Usuń" action="#{userEdit.deleteUser(u)}" update="@form" />
+</h:form>
 </ui:define>
 </ui:composition>
 

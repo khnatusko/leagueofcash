@@ -23,36 +23,24 @@
 			</p:panel>
 </h:form>
     <h:form>
-        <p:dataTable var="u" value="#{PaginatorView.list}" rows="10"
+        <p:dataTable var="players" value="#{paginatorView.model}" rows="10"
                      paginator="true"
                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                      currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-                     rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+                     rowsPerPageTemplate="5,10,{ShowAll|'All'}" lazy="true">
 
             <p:column headerText="Name">
-                <h:outputText value="#{u.name}" />
+                <h:outputText value="#{players.name}"/>
             </p:column>
-
             <p:column headerText="Last Name">
-                <h:outputText value="#{u.last_Name}" />
+                <h:outputText value="#{players.last_Name}"/>
             </p:column>
-
             <p:column headerText="Nick">
-                <h:outputText value="#{u.nick}" />
+                <h:outputText value="#{players.nick}"/>
             </p:column>
-
             <p:column headerText="Position">
-                <h:outputText value="#{u.position}" />
+                <h:outputText value="#{players.position}"/>
             </p:column>
-            
-
-            <f:facet name="paginatorTopLeft">
-                <p:commandButton type="button" icon="pi pi-refresh"/>
-            </f:facet>
-
-            <f:facet name="paginatorBottomRight">
-                <p:commandButton type="button" icon="pi pi-cloud-upload"/>
-            </f:facet>
 
         </p:dataTable>
     </h:form>

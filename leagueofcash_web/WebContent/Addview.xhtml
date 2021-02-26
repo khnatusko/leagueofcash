@@ -5,52 +5,100 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/page-template.xhtml">
+<ui:define name="pageContent">
 
-<f:metadata>
-    <f:viewAction action="#{personEditBB.onLoad()}" />
-</f:metadata>
 
 <h:head>
 	<meta charset="utf-8"/>
 	
 </h:head>
 
-<h:body style="background-color: #eee; margin: 0.5em;">
 
-	<p:panel toggleable="true" header="Edycja rekordu">
 
-		<h:form rendered="#{personEditBB.person != null}">
-			<h:panelGrid columns="3" cellpadding="5">
+	<p:panel toggleable="true" header="Dodaj nowego użytkownika">
 
-				<h:outputLabel for="p-name" value="imię:" />
-				<p:inputText id="p-name" value="#{UserAdd.user.name}"
+		<h:form>
+			<h:panelGrid columns="3" cellpadding="5" styleClass="center-space">
+
+				<h:outputLabel for="name" value="Imię:" />
+				<p:inputText id="name" value="#{userAdd.user.name}"
 					required="true" requiredMessage="Podaj imię"
 					validatorMessage="co najwyżej 40 znaków">
 					<f:validateLength maximum="40" />
 				</p:inputText>
-				<p:message for="p-name" display="icon"/>
+				<p:message for="name" display="icon"/>
 
-				<h:outputLabel for="p-surname" value="nazwisko:" />
-				<p:inputText id="p-surname" value="#{UserAdd.user.last_name}"
+				<h:outputLabel for="last_Name" value="Nazwisko:" />
+				<p:inputText id="last_Name" value="#{userAdd.user.last_Name}"
 					required="true" requiredMessage="podaj nazwisko"
 					validatorMessage="co najwyżej 40 znaków">
 					<f:validateLength maximum="40" />
 				</p:inputText>
-				<p:message for="p-surname" display="icon"/>
+				<p:message for="last_Name" display="icon"/>
 
-				<
+				<h:outputLabel for="nick" value="Nick:" />
+				<p:inputText id="nick" value="#{userAdd.user.nick}"
+					required="true" requiredMessage="Podaj nick"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="nick" display="icon"/>
+
+				<h:outputLabel for="position" value="Pozycja:" />
+				<p:selectOneMenu id="position" value="#{userAdd.user.position}"
+					required="true" requiredMessage="podaj pozycję"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:selectItem itemLabel="Wybierz pozycję:" itemValue="" />
+					<f:selectItem itemLabel="Top" itemValue="Top" />
+					<f:selectItem itemLabel="Jungle" itemValue="Jungle" />
+					<f:selectItem itemLabel="Mid" itemValue="Mid" />
+					<f:selectItem itemLabel="Adc" itemValue="Adc" />
+					<f:selectItem itemLabel="Support" itemValue="Support" />
+					<f:selectItem itemLabel="Coach" itemValue="Coach" />
+					<f:validateLength maximum="40" />
+				</p:selectOneMenu>
+				<p:message for="position" display="icon"/>
+				
+				<h:outputLabel for="login" value="Login:" />
+				<p:inputText id="login" value="#{userAdd.user.login}"
+					required="true" requiredMessage="Podaj login"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="login" display="icon"/>
+
+				<h:outputLabel for="password" value="Hasło:" />
+				<p:password id="password" value="#{userAdd.user.password}"
+					required="true" requiredMessage="podaj hasło:"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:password>
+				<p:message for="password" display="icon"/>
+				
+				<h:outputLabel for="rola" value="Rola:" />
+				<p:selectOneMenu id="rola" value="#{userAdd.user.rola}"
+					required="true" requiredMessage="podaj rolę:"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:selectItem itemLabel="Wybierz rolę:" itemValue="" />
+					<f:selectItem itemLabel="user" itemValue="user" />
+					<f:selectItem itemLabel="admin" itemValue="admin" />
+					<f:validateLength maximum="40" />
+				</p:selectOneMenu>
+				<p:message for="rola" display="icon"/>
+
+			
+
 			</h:panelGrid>
 
-			<p:messages id="msgs" />
-
-			<p:commandButton value="Zapisz" action="#{UserAdd.saveData()}"
-				style="margin-right: 1em;" update="@form" />
-
-			<p:button value="Anuluj" outcome="list" />
+			<p:commandButton value="Zapisz" action="#{userAdd.addUser()}" style="margin: 1em auto;" update="@form" />
+			<p:commandButton value="Anuluj" style="margin-left: 5em;" outcome="list" />
+			<p:messages />	
 		</h:form>
 
 	</p:panel>
 
-</h:body>
 
+</ui:define>
+</ui:composition>
 </html>

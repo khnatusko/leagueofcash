@@ -6,27 +6,29 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	
-<ui:composition template="/templates/login-template.xhtml">
+<ui:composition template="/templates/login2-template.xhtml">
+<ui:define name="pageContent">
 
-	<ui:define name="content">
-
+	<p:panel header="Logowanie" style="margin: 1em auto;">
+	
 		<h:form>
-		<p:panel header="Logowanie" style="margin: 1em auto;">
-			<h:panelGrid columns="2" cellpadding="5" styleClass="bottom-space">
-				<h:outputLabel for="login" value="login:" />
-				<h:inputText id="login" value="#{loginBB.login}"
-					required="true"	requiredMessage="podaj login"/>
-				<h:outputLabel for="password" value="hasło:" />
-				<h:inputSecret id="password" value="#{loginBB.password}"
-				required="true"	requiredMessage="podaj hasło"/>
-			</h:panelGrid>
-		</p:panel>
-			<h:messages />
-			<h:commandButton value="Zaloguj" action="#{loginBB.doLogin()}" update="msg" />
+			<p:panelGrid columns="2" cellpadding="10" styleClass="center-space">
 			
+				<p:outputLabel for="login" value="Login:" />
+				<p:inputText id="login" value="#{loginBB.login}"
+					required="true"	requiredMessage="Brak loginu"/>
+					
+				<p:outputLabel for="password" value="Hasło:" />
+				<p:password id="password" value="#{loginBB.password}"
+				required="true"	requiredMessage="Brak hasła" />
+				
+					
+			</p:panelGrid>
+			<p:commandButton value="Zaloguj" action="#{loginBB.doLogin()}" style="margin: 1em auto;" update="@form"/>			
+			<p:messages id="msg" />	
 		</h:form>
-
-	</ui:define>
-
+		
+	</p:panel>		
+</ui:define>
 </ui:composition>
 </html>

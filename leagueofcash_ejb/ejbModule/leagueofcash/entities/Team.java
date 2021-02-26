@@ -10,6 +10,8 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name = "Team")
+//@SecondaryTable(name = "League", pkJoinColumns = @PrimaryKeyJoinColumn(name = "idLeague", referencedColumnName = "league"))
 @NamedQuery(name="Team.findAll", query="SELECT t FROM Team t")
 public class Team implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -23,9 +25,12 @@ public class Team implements Serializable {
 	private String shortCut;
 
 	private String title;
+	
+	private String leaguename;
 
 	//bi-directional many-to-one association to League
 	@ManyToOne
+	@JoinTable(name="idLeague")
 	private League league;
 
 	//bi-directional many-to-many association to User
@@ -82,5 +87,8 @@ public class Team implements Serializable {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
+
+	
+	
 
 }

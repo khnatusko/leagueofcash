@@ -1,30 +1,30 @@
 package leagueofcash.dao;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-
-
-
 import javax.faces.bean.NoneScoped;
-
+import javax.inject.Named;
 
 import leagueofcash.entities.User;
 
 
-
 @Stateless
-public class UserDAO {
-	private final static String UNIT_NAME = "LoC";
 
+public class UserDAO {
 	
+	private final static String UNIT_NAME = "LoC";
+	
+
 	@PersistenceContext(unitName = UNIT_NAME)
 	protected EntityManager em;
 
@@ -43,7 +43,9 @@ public class UserDAO {
 	public User find(Object idUser) {
 		return em.find(User.class, idUser);
 	}
-	
+
+
+
 public User getUserFromDatabase(String login, String password) {
 		
 	Query query = em.createQuery("SELECT u FROM User u WHERE u.login = :login and u.password = :password",User.class);
@@ -55,29 +57,35 @@ try {
 } catch(NoResultException e) {
 	return null;
 }
-	
-    
+	    
 }
 
-public List<String> getUserRolesFromDatabase(User user) {
-		
-		ArrayList<String> roles = new ArrayList<String>();
-		
-		if (user.getRola().equals("user")) {
-			roles.add("user");
-		}
-		if (user.getRola().equals("admin")) {
-			roles.add("admin");
-		}
-	
-		return roles;
-	}
+//public int getUsersAll() {
+//	Query query = em.createQuery("Select count(u.idUser) From User u");
+//	return ((Long)query.getSingleResult()).intValue();
+//}
+
+public List<User> getUsers(int offset, int pageSize){
+	//List<User> user = null;
+	Query query = em.createQuery("From User");
+	query.setFirstResult(offset);
+	query.setMaxResults(pageSize);
+	List<User> list = query.getResultList();
+	return list;
+	//try {
+	//	user = query.getResultList();
+	//} catch (Exception e) {
+	//	e.printStackTrace();
+	//}
+	//return user;
+}
+
 
 public List<User> getFullList() {
 	List<User> list = null;
 
 	Query query = em.createQuery("select u from User u");
-
+		
 	try {
 		list = query.getResultList();
 	} catch (Exception e) {
@@ -88,7 +96,7 @@ public List<User> getFullList() {
 }
 
 
-public List<User> getList(Map<String, Object> searchParams) {
+public List<User> getList(Map<String,Object> searchParams) {
 	List<User> list = null;
 
 	// 1. Build query string with parameters
@@ -112,7 +120,7 @@ public List<User> getList(Map<String, Object> searchParams) {
 
 	// 2. Create query object
 	Query query = em.createQuery(select + from + where + orderby);
-
+		
 	// 3. Set configured parameters
 	if (last_Name != null) {
 		query.setParameter("last_Name", last_Name+"%");
@@ -129,6 +137,7 @@ public List<User> getList(Map<String, Object> searchParams) {
 
 	return list;
 }
+
 
 
 	

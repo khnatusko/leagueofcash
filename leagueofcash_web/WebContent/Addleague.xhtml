@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/page-template.xhtml">
+<ui:define name="pageContent">
+
+<f:metadata>
+	<f:viewAction action="#{userAdd.onLoad()}" />
+</f:metadata>
+
+<h:head>
+	<meta charset="utf-8"/>
+	
+</h:head>
+
+	<p:panel toggleable="true" header="Dodaj nową Ligę">
+
+		<h:form>
+			<h:panelGrid columns="3" cellpadding="5" styleClass="center-space">
+
+				<h:outputLabel for="name" value="Nazwa:" />
+				<p:inputText id="name" value="#{userAdd.league.name}"
+					required="true" requiredMessage="Podaj nazwę"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="name" display="icon"/>
+
+				<h:outputLabel for="country" value="Kraj:" />
+				<p:inputText id="country" value="#{userAdd.league.country}"
+					required="true" requiredMessage="podaj kraj pochodzenia"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="country" display="icon"/>
+
+				<h:outputLabel for="price" value="Cena:" />
+				<p:inputNumber id="price" value="#{userAdd.league.price}" decimalSeparator=","
+					thousandSeparator="." required="true" requiredMessage="Podaj cenę"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="400" />
+				</p:inputNumber>
+				<p:message for="price" display="icon"/>
+
+			</h:panelGrid>
+
+			<p:commandButton value="Zapisz" action="#{userAdd.addLeague()}" style="margin: 1em auto;" update="@form" />
+			<p:commandButton value="Anuluj" style="margin-left: 5em;" outcome="index" />
+			<p:messages />	
+		</h:form>
+
+	</p:panel>
+
+
+</ui:define>
+</ui:composition>
+</html>

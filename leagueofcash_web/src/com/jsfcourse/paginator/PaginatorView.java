@@ -16,9 +16,11 @@ import javax.faces.context.Flash;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
-
+import org.primefaces.model.LazyDataModel;
 
 import leagueofcash.dao.UserDAO;
 import leagueofcash.entities.User;
@@ -26,47 +28,38 @@ import leagueofcash.entities.User;
 
 @Named
 @RequestScoped
-
-
-
-public class PaginatorView{
-
-	private String last_Name;
+public class PaginatorView implements Serializable{
+	
+	//private LazyDataModel<User> lazyModel;
 	
 	@Inject
-	ExternalContext extcontext;
+	private UserDAO user;
 	
 	@EJB
-	UserDAO UserDAO;
-
-	public String getLast_Name() {
-		return last_Name;
-	}
-
-	public void setLast_Name(String last_Name) {
-		this.last_Name = last_Name;
-	}
-
-	public List<User> getFullList(){
-		return UserDAO.getFullList();
-	}
+	UserDAO userdao;
 	
 	
-	public List<User> getList(){
-		List<User> list = null;
-		
-		//1. Prepare search params
-		Map<String,Object> searchParams = new HashMap<String, Object>();
-		
-		if (last_Name != null && last_Name.length() > 0){
-			searchParams.put("last_Name", last_Name);
-		}
-		
-		//2. Get list
-		list = UserDAO.getList(searchParams);
-		
-		return list;
-	}
     
+		//Przekazaæ DAO here
+      PaginatorDataModel dataModel = new PaginatorDataModel();
+    
+		
+	public LazyDataModel<User> getModel(){
+		return dataModel;
+	}
+	
+	//public void setLazyModel(LazyDataModel<User> lazyModel) {
+   //     this.lazyModel = lazyModel;
+   // }
 
+	//public UserDAO getUserdao() {
+	//	return userdao;
+	//}
+
+	//public void setUserdao(UserDAO userdao) {
+	//	this.userdao = userdao;
+	//}
+	
+	
+	
 }

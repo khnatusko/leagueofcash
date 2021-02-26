@@ -12,8 +12,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer idUser;
+	private int idUser;
 
 	private String last_Name;
 
@@ -49,11 +48,11 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public Integer getIdUser() {
+	public int getIdUser() {
 		return this.idUser;
 	}
 
-	public void setIdUser(Integer idUser) {
+	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
 

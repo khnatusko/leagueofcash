@@ -8,24 +8,9 @@
 	
 <ui:composition template="/templates/register-template.xhtml">
 
-
-
 	<ui:define name="content">
-		<h:form>
-		<p:panel header="Opcje wyszukiwania" 
-		style="margin-bottom: 1em;">
-		
-			<h:panelGrid columns="2" cellpadding="5">
-				<h:outputLabel value="nazwisko:" />
-				<p:inputText value="#{UserEdit.last_Name}" />
-				<p:commandButton value="Szukaj" />
-			</h:panelGrid>
-			</p:panel>
-		</h:form>
-		<h:form>
-	<p:commandButton value="Dodaj nowego użytkownika" action="#{UserEdit.newUser()}"/>
-	</h:form>
+	
 </ui:define>	
-
+<p:messages id="msg" />
 </ui:composition>
 </html>

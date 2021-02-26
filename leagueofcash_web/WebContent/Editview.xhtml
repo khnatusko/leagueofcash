@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/page-template.xhtml">
+<ui:define name="pageContent">
+
+
+<h:head>
+	<meta charset="utf-8"/>
+	
+</h:head>
+
+
+
+	<p:panel toggleable="true" header="Edytuj dane logowania">
+
+		<h:form>
+			<h:panelGrid columns="3" cellpadding="5" styleClass="center-space">
+						
+				<h:outputLabel for="login" value="Login:" />
+				<p:inputText id="login" value="#{userEdit.user.login}"
+					required="true" requiredMessage="Podaj login"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="login" display="icon"/>
+
+				<h:outputLabel for="password" value="Hasło:" />
+				<p:password id="password" value="#{userEdit.user.password}"
+					required="true" requiredMessage="podaj hasło:"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:password>
+				<p:message for="password" display="icon"/>
+				
+
+
+			
+
+			</h:panelGrid>
+
+			<p:commandButton value="Zmień" action="#{userEdit.changeLogin()}" style="margin: 1em auto;" update="@form" />
+			<p:commandButton value="Anuluj" style="margin-left: 5em;" outcome="list" />
+			<p:messages />	
+		</h:form>
+
+	</p:panel>
+
+
+</ui:define>
+</ui:composition>
+</html>

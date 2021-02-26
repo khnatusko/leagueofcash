@@ -6,11 +6,14 @@ body{
 }
 
 .bottom-space{
-	margin-bottom: 1em;
+	margin: auto;
 	text-align: center;
 	color: black;
 }
-
+.center-space{
+	margin: auto;
+	text-align: center;
+}
 .top-space{
 	margin-top: 1em;
 	

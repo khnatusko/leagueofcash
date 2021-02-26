@@ -12,6 +12,7 @@ public class RemoteClient<T> {
 	private String login;
 	private String password;
 	private String name;
+	private String title;
 	private String remoteAddr;
 	private String remoteHost;
 	private int remotePort;
@@ -28,10 +29,11 @@ public class RemoteClient<T> {
 		this.remotePort = request.getRemotePort();
 	}
 
-	public RemoteClient(String login, String password, String name, ServletRequest request) {
+	public RemoteClient(String login, String password, String name,String title, ServletRequest request) {
 		this.login = login;
 		this.password = password;
 		this.name = name;
+		this.title = title;
 		if (request != null) {
 			this.remoteAddr = request.getRemoteAddr();
 			this.remoteHost = request.getRemoteHost();
@@ -105,6 +107,14 @@ public class RemoteClient<T> {
 
 	public boolean isInRole(String role) {
 		return roles.contains(role);
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public boolean isInOneRole(HashSet<String> roles) {

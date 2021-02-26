@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/page-template.xhtml">
+<ui:define name="pageContent">
+
+<f:metadata>
+	<f:viewAction action="#{userAdd.onLoad()}" />
+</f:metadata>
+
+<h:head>
+	<meta charset="utf-8"/>
+	
+</h:head>
+
+	<p:panel toggleable="true" header="Dodaj nową Ligę">
+
+		<h:form>
+			<h:panelGrid columns="3" cellpadding="5" styleClass="center-space">
+
+				<h:outputLabel for="title" value="Tytuł:" />
+				<p:inputText id="title" value="#{userAdd.team.title}"
+					required="true" requiredMessage="Podaj tytuł"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="title" display="icon"/>
+
+				<h:outputLabel for="shortCut" value="Skrót:" />
+				<p:inputText id="shortCut" value="#{userAdd.team.shortCut}"
+					required="true" requiredMessage="podaj skrót"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="shortCut" display="icon"/>
+
+				<h:outputLabel for="budget" value="Budżet:" />
+				<p:inputNumber id="budget" value="#{userAdd.team.budget}" decimalSeparator=","
+					thousandSeparator="." required="true" requiredMessage="Podaj budżet"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="400" />
+				</p:inputNumber>
+				<p:message for="budget" display="icon"/>
+				
+				<h:outputLabel for="league" value="Liga:" />
+					<p:selectOneRadio id="league" value="#{userAdd.team.league}" required="true" unselectable="true" requiredMessage="wybierz drużynę">
+            			<f:selectItem itemLabel="Ultraliga" itemValue="Ultraliga"/>
+            			<f:selectItem itemLabel="LFL" itemValue="LFL"/>
+            			<f:selectItem itemLabel="LVP" itemValue="LVP"/>
+       			 	</p:selectOneRadio>
+					<p:message for="league" display="icon"/>
+
+			</h:panelGrid>
+
+			<p:commandButton value="Zapisz" action="#{userAdd.addTeam()}" style="margin: 1em auto;" update="@form" />
+			<p:commandButton value="Anuluj" style="margin-left: 5em;" outcome="index" />
+			<p:messages />	
+		</h:form>
+
+	</p:panel>
+
+
+</ui:define>
+</ui:composition>
+</html>
