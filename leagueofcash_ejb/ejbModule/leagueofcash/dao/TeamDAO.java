@@ -8,6 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import leagueofcash.entities.League;
 import leagueofcash.entities.Team;
 import leagueofcash.entities.User;
 
@@ -37,7 +38,19 @@ public class TeamDAO {
 		return em.find(Team.class, id);
 	}
 
-	
+	public Team getTeamFromDatabase() {
+		Team last = new Team();
+		Query query = em.createQuery("SELECT t FROM Team t order by idteam DESC");
+	    query.setMaxResults(1);
+	      
+	try {	
+		last = (Team)query.getSingleResult();
+		
+	} catch(NoResultException e) {
+		last = null;
+	}
+	return last;
+	}
 	
 	
 }

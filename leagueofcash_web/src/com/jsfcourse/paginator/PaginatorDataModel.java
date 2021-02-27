@@ -50,11 +50,11 @@ public class PaginatorDataModel extends LazyDataModel<User> {
 	//public PaginatorDataModel() {
 	//	this.setRowCount(userDAO.getUsersAll());
 	//}
-	@Override
-	public List<User> load(int offset, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy){
-		List<User> list = userDAO.getUsers(offset, pageSize);
-		return list;
-	}
+	//@Override
+	//public List<User> load(int offset, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy){
+		//List<User> list = userDAO.getUsers(offset, pageSize);
+		//return list;
+	//}
 	
 	
 	

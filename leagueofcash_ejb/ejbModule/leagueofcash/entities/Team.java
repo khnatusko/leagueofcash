@@ -26,7 +26,7 @@ public class Team implements Serializable {
 
 	private String title;
 	
-	private String leaguename;
+	
 
 	//bi-directional many-to-one association to League
 	@ManyToOne

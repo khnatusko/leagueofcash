@@ -17,6 +17,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.JoinTable;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Email;
@@ -43,16 +44,24 @@ public class UserAdd implements Serializable {
 		private League league = new League();
 		private Team team = new Team();
 		private User user = new User();
-		private List<User> userlist = new ArrayList<User>();;
+		private List<User> userlist = new ArrayList<User>();
 		private List<League> selectedLeague = new ArrayList<League>();
 		private List<Team> teams = new ArrayList<Team>();
 		private User loaded = null;
 		private String name;
 		private String leaguename;
 		private int idLeague;
-	
+		private int idUser;
 	
 		
+	public int getIdUser() {
+			return idUser;
+		}
+
+		public void setIdUser(int idUser) {
+			this.idUser = idUser;
+		}
+
 	public Team getTeam() {
 			return team;
 		}
@@ -119,12 +128,6 @@ public class UserAdd implements Serializable {
 	}
 
 
-
-
-
-
-
-
 	@Inject
 	FacesContext context;
 	
@@ -138,9 +141,9 @@ public class UserAdd implements Serializable {
 	@EJB
 	UserDAO userDAO;
 	
-	//@Test
 	
-	//public void testMethod() throws Exception{
+	
+	
 	public void onLoad() throws IOException {
 		RemoteClient<User> rm = new RemoteClient<User>();
 		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
@@ -158,6 +161,17 @@ public class UserAdd implements Serializable {
 		teams = loaded.getTeams();
 }
 //	}	
+	public String UserCharges() {
+		FacesContext ctx = FacesContext.getCurrentInstance();
+
+		User user = userDAO.getChargesDetails(idUser);
+		
+		RemoteClient<User> client = new RemoteClient<User>(); 
+		client.setDetails(user);
+		HttpServletRequest request = (HttpServletRequest) ctx.getExternalContext().getRequest();
+		client.store(request);
+		return PAGE_STAY_AT_THE_SAME_USER;
+	}
 
 	public String addUser() {
 		try {
@@ -172,20 +186,34 @@ public class UserAdd implements Serializable {
 		}
 	}
 	
-	public String addTeam(Map<String,Object> searchParams) {
+	public String addTeam() {
 		try {
-		
-		League league = leagueDAO.getLeagueFromDatabase(this.name);
-		league.addTeam(this.team);
-		league.getTeams().add(team);
-		teamDAO.create(this.team);
+			
+		leagueDAO.create(this.league);
+		League league = new League();
+		league = leagueDAO.getLeagueFromDatabase();
+		team.setLeague(league);
+		team.setUsers(userlist);
+		teamDAO.create(team);
 		Team team = new Team();
-		
-		
+		team = teamDAO.getTeamFromDatabase();
+		//League league = leagueDAO.getLeagueFromDatabase(name);
+		//league.addTeam(this.team);
+		//league.getTeams().add(this.team);
+		//teamDAO.create(team);
+		//Team team = new Team();
+			
+			
+		for(User u : userlist) {
+			u.getTeams().add(team);
+			userDAO.merge(u);
+		}
+		loaded.getTeams().add(team);
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Dru¿yna zosta³a dodany", null));	
 		return PAGE_STAY_AT_THE_SAME_TEAM;
 		
 		}catch(Exception e) {
+			e.printStackTrace();
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "B³¹d podczas dodawania", null));
 		return PAGE_STAY_AT_THE_SAME_TEAM;
 		}

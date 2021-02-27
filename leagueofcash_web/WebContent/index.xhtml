@@ -22,10 +22,13 @@
 					
 					
 					<h:outputText value="Drużyna: "/>
-					<h:outputText value="#{remoteClient.details.teams}"/>
+					<h:outputText value=""/>
 					
 					<h:outputText value="Kontrakt: "/>
 					<h:outputText value=""/>
+					
+					<h:outputText value="Płaca: "/>
+					<h:outputText value="#{userDAO.getChargesDetails()}"/>
 					
 				</p:panelGrid>
 			

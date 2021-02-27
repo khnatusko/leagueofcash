@@ -66,7 +66,7 @@ try {
 //}
 
 public List<User> getUsers(int offset, int pageSize){
-	//List<User> user = null;
+	List<User> user = null;
 	Query query = em.createQuery("From User");
 	query.setFirstResult(offset);
 	query.setMaxResults(pageSize);
@@ -80,6 +80,12 @@ public List<User> getUsers(int offset, int pageSize){
 	//return user;
 }
 
+public User getChargesDetails(int idUser) {
+	User u = em.find(User.class, idUser);
+	u.getCharges().size();
+	
+	return u;
+}
 
 public List<User> getFullList() {
 	List<User> list = null;
