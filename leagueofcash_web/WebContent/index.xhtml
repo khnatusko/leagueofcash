@@ -18,18 +18,20 @@
 						<h:outputText value="Witaj! #{remoteClient.details.name} #{remoteClient.details.last_Name}" /><br/>
 					</f:facet>
 					<h:outputText value="Dane personalne: "/>
-					<h:outputText value="Imię: #{remoteClient.details.name}, Nazwisko: #{remoteClient.details.last_Name}"/>
+					<h:outputText value="#{remoteClient.details.name} #{remoteClient.details.last_Name}"/>
 					
 					
-					<h:outputText value="Drużyna: "/>
-					<h:outputText value=""/>
+					<h:outputText value="Pozycja: "/>
+					<h:outputText value="#{remoteClient.details.position}"/>
 					
-					<h:outputText value="Kontrakt: "/>
-					<h:outputText value=""/>
+					<h:outputText value="Rola: "/>
+					<h:outputText value="#{remoteClient.details.rola}"/>
 					
-					<h:outputText value="Płaca: "/>
-					<h:outputText value="#{userDAO.getChargesDetails()}"/>
+					<h:outputText value="Dane logowania: "/>
+					<p:commandButton value="Zmień dane logowania" action="Editview?faces-redirect=true" />
 					
+					
+				
 				</p:panelGrid>
 			
 </h:form>
