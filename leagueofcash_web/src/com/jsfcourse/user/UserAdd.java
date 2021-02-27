@@ -45,6 +45,7 @@ public class UserAdd implements Serializable {
 		private Team team = new Team();
 		private User user = new User();
 		private List<User> userlist = new ArrayList<User>();
+		private List<User> users = new ArrayList<User>();
 		private List<League> selectedLeague = new ArrayList<League>();
 		private List<Team> teams = new ArrayList<Team>();
 		private User loaded = null;
@@ -65,6 +66,15 @@ public class UserAdd implements Serializable {
 	public Team getTeam() {
 			return team;
 		}
+
+	
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 
 	public void setTeam(Team team) {
 			this.team = team;
@@ -149,7 +159,7 @@ public class UserAdd implements Serializable {
 		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
 		rm = RemoteClient.load(session);
 		loaded = (User) rm.getDetails();
-		userlist = userDAO.getFullList();
+		users = userDAO.getFullList();
 		Iterator<User> i = userlist.iterator();
 		while (i.hasNext()) {
 			User u = i.next();
@@ -157,7 +167,7 @@ public class UserAdd implements Serializable {
 				i.remove();
 			}
 		}
-		setUserlist(userlist);
+		setUsers(users);
 		teams = loaded.getTeams();
 }
 //	}	
