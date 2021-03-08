@@ -84,17 +84,27 @@ try {
 
 public List<User> getUsers(int offset, int pageSize){
 	List<User> user = null;
-	Query query = em.createQuery("From User");
+	Query query = em.createQuery("Select u From User u");
 	query.setFirstResult(offset);
 	query.setMaxResults(pageSize);
 	List<User> list = query.getResultList();
 	return list;
-	//try {
-	//	user = query.getResultList();
-	//} catch (Exception e) {
-	//	e.printStackTrace();
-	//}
-	//return user;
+
+}
+
+public int getRows() {
+	int list = 0;
+	
+	Query query = em.createQuery("Select u From User u");
+	
+	try {
+		list = query.getResultList().size();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+
+	return list;
+	
 }
 
 public User getChargesDetails(int idUser) {
@@ -103,6 +113,8 @@ public User getChargesDetails(int idUser) {
 	
 	return u;
 }
+
+
 
 public List<User> getFullList() {
 	List<User> list = null;

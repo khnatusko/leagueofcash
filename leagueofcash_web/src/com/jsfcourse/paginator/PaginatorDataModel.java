@@ -36,18 +36,18 @@ public class PaginatorDataModel extends LazyDataModel<User> {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private List<User> getUsers;
+	private UserDAO u;
 	
-    public List<User> getGetUsers() {
-		return getUsers;
+	public UserDAO getU() {
+		return u;
 	}
 
-	public void setGetUsers(List<User> getUsers) {
-		this.getUsers = getUsers;
+	public void setU(UserDAO u) {
+		this.u = u;
 	}
 
-	public PaginatorDataModel(List<User> getUsers) {
-		this.getUsers = getUsers;
+	public PaginatorDataModel(UserDAO u) {
+		this.u = u;
 	}
 	
 	@EJB
@@ -58,22 +58,14 @@ public class PaginatorDataModel extends LazyDataModel<User> {
     
 	@Override
 	public List<User> load (int offset, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy){
-		List<User> user = new ArrayList<User>();
+
 		int rowCount = 0;
-		if(getUsers.size()>0) {
-			rowCount = getUsers.size();
-			
-			user = (List<User>) getUsers.stream()
-					.skip(offset)
-					.limit(pageSize)
-					.collect(Collectors.toList());
+			rowCount = u.getRows();
+						
 			setRowCount((int) rowCount);
 			
-			return user;
-		}else {
-			user = null;
-			return user;
-		}
+			return u.getUsers(offset, pageSize);
+		
 		
 	}
 

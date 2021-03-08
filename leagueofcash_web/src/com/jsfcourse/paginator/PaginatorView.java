@@ -40,7 +40,7 @@ public class PaginatorView implements Serializable{
 	
 	@PostConstruct
 	public void init() {
-		lazyModel = new PaginatorDataModel(userdao.getFullList());
+		lazyModel = new PaginatorDataModel(userdao);
 	}
 
 	public LazyDataModel<User> getLazyModel() {
