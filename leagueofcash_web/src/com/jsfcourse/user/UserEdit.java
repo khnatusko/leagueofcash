@@ -59,10 +59,6 @@ public class UserEdit {
 		}
 
 
-
-
-
-
 		@Inject
 		FacesContext context;
 
@@ -94,7 +90,7 @@ public class UserEdit {
 				}
 				return PAGE_STAY_AT_THE_SAME_USER;
 			}
-			return PAGE_STAY_AT_THE_SAME_USER;
+			return PAGE_USER;
 		}
 		//public String deleteuser(){
 		//	userDAO.remove(user);

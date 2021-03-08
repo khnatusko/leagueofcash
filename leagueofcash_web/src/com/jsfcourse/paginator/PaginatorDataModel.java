@@ -2,6 +2,7 @@ package com.jsfcourse.paginator;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,68 +36,45 @@ public class PaginatorDataModel extends LazyDataModel<User> {
 	
 	private static final long serialVersionUID = 1L;
 	
-	//private List<User> datasource;
+	private List<User> getUsers;
+	
+    public List<User> getGetUsers() {
+		return getUsers;
+	}
 
-   // public PaginatorDataModel(List<User> datasource) {
-    //    this.datasource = datasource;
-    //}
-    
-    @EJB
+	public void setGetUsers(List<User> getUsers) {
+		this.getUsers = getUsers;
+	}
+
+	public PaginatorDataModel(List<User> getUsers) {
+		this.getUsers = getUsers;
+	}
+	
+	@EJB
     UserDAO userDAO;
     
 	@Inject
 	FacesContext context;
     
-	//public PaginatorDataModel() {
-	//	this.setRowCount(userDAO.getUsersAll());
-	//}
-	//@Override
-	//public List<User> load(int offset, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy){
-		//List<User> list = userDAO.getUsers(offset, pageSize);
-		//return list;
-	//}
-	
-	
-	
-	 //@Override
-	 //   public User getRowData(String rowKey) {
-	  //      for (User customer : datasource) {
-	  //          if (customer.getIdUser() == Integer.parseInt(rowKey)) {
-	   //             return customer;
-	   //         }
-	  //      }
-
-	   //     return null;
-	  //  }
-
-	  //  @Override
-	  //  public String getRowKey(User customer) {
-	 //       return String.valueOf(customer.getIdUser());
-	 //   }
-
-	  //  @Override
-	 //   public List<User> load(int offset, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
-	  //    List<User> list = userDAO.getUsers(offset,pageSize);
-	    	
-	    	
-	    	
-	  //  	  long rowCount = datasource.stream()
-	               // .filter(o -> filter(FacesContext.getCurrentInstance(), filterBy.values(), o))
-	   //             .count();
-
-	    //    List<User> getUsers = datasource.stream()
-	    //            .skip(offset)
-	    //        //    .filter(o -> filter(FacesContext.getCurrentInstance(), filterBy.values(), o))
-	     //           .limit(pageSize)
-	      //          .collect(Collectors.toList());
-//
-
-	         //rowCount
-	      //  setRowCount((int) rowCount);
-//
-	    //    return list;
-	   // }
-
-
+	@Override
+	public List<User> load (int offset, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy){
+		List<User> user = new ArrayList<User>();
+		int rowCount = 0;
+		if(getUsers.size()>0) {
+			rowCount = getUsers.size();
+			
+			user = (List<User>) getUsers.stream()
+					.skip(offset)
+					.limit(pageSize)
+					.collect(Collectors.toList());
+			setRowCount((int) rowCount);
+			
+			return user;
+		}else {
+			user = null;
+			return user;
+		}
+		
+	}
 
 }

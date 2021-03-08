@@ -30,7 +30,7 @@ import leagueofcash.entities.User;
 @RequestScoped
 public class PaginatorView implements Serializable{
 	
-	//private LazyDataModel<User> lazyModel;
+	private LazyDataModel<User> lazyModel;
 	
 	@Inject
 	private UserDAO user;
@@ -38,27 +38,29 @@ public class PaginatorView implements Serializable{
 	@EJB
 	UserDAO userdao;
 	
-	
-    
-		//Przekazaæ DAO here
-      PaginatorDataModel dataModel = new PaginatorDataModel();
-    
-		
-	public LazyDataModel<User> getModel(){
-		return dataModel;
+	@PostConstruct
+	public void init() {
+		lazyModel = new PaginatorDataModel(userdao.getFullList());
+	}
+
+	public LazyDataModel<User> getLazyModel() {
+		return lazyModel;
+	}
+
+
+	public void setLazyModel(LazyDataModel<User> lazyModel) {
+		this.lazyModel = lazyModel;
+	}
+
+	public UserDAO getUserdao() {
+		return userdao;
+	}
+
+	public void setUserdao(UserDAO userdao) {
+		this.userdao = userdao;
 	}
 	
-	//public void setLazyModel(LazyDataModel<User> lazyModel) {
-   //     this.lazyModel = lazyModel;
-   // }
-
-	//public UserDAO getUserdao() {
-	//	return userdao;
-	//}
-
-	//public void setUserdao(UserDAO userdao) {
-	//	this.userdao = userdao;
-	//}
+	
 	
 	
 	

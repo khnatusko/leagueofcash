@@ -47,9 +47,10 @@ public class LeagueDAO {
 	}
 
 	
-	public League getLeagueFromDatabase() {
+	public League getLeagueFromDatabase(String name) {
 		League last = new League ();
-		Query query = em.createQuery("SELECT l FROM League l order by idLeague DESC");
+		Query query = em.createQuery("SELECT l FROM League l where l.name =: name order by idLeague DESC").setParameter("name", name);
+		//Query query = em.createQuery("SELECT l FROM League l order by idLeague DESC");
 	    query.setMaxResults(1);
 	      
 	try {	
@@ -61,20 +62,6 @@ public class LeagueDAO {
 	return last;
 	}
 	
-	
-	
-	//public League getLeagueFromDatabase(String name) {
-		//League last = new League ();
-		//Query query = em.createQuery("SELECT l.name FROM League",League.class);
-	  //  query.setParameter("name", name);
-	      
-	//try {	
-	//	return(League)query.getSingleResult();
-		
-	//} catch(NoResultException e) {
-	//	return null;
-	//}
-	//}
 	
 	public List<League> getFullList() {
 		List<League> list = null;

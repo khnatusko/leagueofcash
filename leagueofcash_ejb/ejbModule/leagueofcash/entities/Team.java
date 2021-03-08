@@ -10,8 +10,6 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name = "Team")
-//@SecondaryTable(name = "League", pkJoinColumns = @PrimaryKeyJoinColumn(name = "idLeague", referencedColumnName = "league"))
 @NamedQuery(name="Team.findAll", query="SELECT t FROM Team t")
 public class Team implements Serializable {
 	private static final long serialVersionUID = 1L;

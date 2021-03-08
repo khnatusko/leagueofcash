@@ -17,11 +17,12 @@
 	
 </h:head>
 
-	<p:panel toggleable="true" header="Dodaj nową Ligę">
+	<p:panel toggleable="true" header="Dodaj nową Drużynę">
 
 		<h:form>
-			<h:panelGrid columns="3" cellpadding="5" styleClass="center-space">
-
+			<h:panelGrid columns="4" cellpadding="3" styleClass="center-space">
+			<div class="p-grid">
+				<div class="p-col-12 p-md-6 p-lg-3">
 				<h:outputLabel for="title" value="Tytuł:" />
 				<p:inputText id="title" value="#{userAdd.team.title}"
 					required="true" requiredMessage="Podaj tytuł"
@@ -29,7 +30,8 @@
 					<f:validateLength maximum="40" />
 				</p:inputText>
 				<p:message for="title" display="icon"/>
-
+				</div>
+				<div class="p-col-12 p-md-6 p-lg-3">
 				<h:outputLabel for="shortCut" value="Skrót:" />
 				<p:inputText id="shortCut" value="#{userAdd.team.shortCut}"
 					required="true" requiredMessage="podaj skrót"
@@ -37,7 +39,9 @@
 					<f:validateLength maximum="40" />
 				</p:inputText>
 				<p:message for="shortCut" display="icon"/>
-
+				</div>
+				
+				<div class="p-col-12 p-md-6 p-lg-3">
 				<h:outputLabel for="budget" value="Budżet:" />
 				<p:inputNumber id="budget" value="#{userAdd.team.budget}" decimalSeparator=","
 					thousandSeparator="." required="true" requiredMessage="Podaj budżet"
@@ -45,18 +49,41 @@
 					<f:validateLength maximum="400" />
 				</p:inputNumber>
 				<p:message for="budget" display="icon"/>
+				</div>
 				
+				<div class="p-col-12 p-md-6 p-lg-3">	
 				<h:outputLabel for="league" value="Liga:" />
-					<p:selectOneRadio id="league" value="#{userAdd.league.name}" required="true" unselectable="true" requiredMessage="wybierz drużynę">
+					<p:selectOneRadio id="league" value="#{userAdd.league.name}" required="true" unselectable="true" style="width:16px;text-align:center" requiredMessage="Wybierz ligę:">
             			<f:selectItem itemLabel="Ultraliga" itemValue="Ultraliga"/>
-            			<f:selectItem itemLabel="LFL" itemValue="LFL"/>
             			<f:selectItem itemLabel="LVP" itemValue="LVP"/>
+            			<f:selectItem itemLabel="LFL" itemValue="LFL"/>
        			 	</p:selectOneRadio>
 					<p:message for="league" display="icon"/>
-
+				</div>
+				
+				
+            	</div>
 			</h:panelGrid>
+			<div class = "p-col-12 p-md-6 p-lg-3" >
+				<p:dataTable id="nick" var="n" value="#{userAdd.users}"
+                     selection="#{userAdd.selectedUser}" rowKey="#{n.idUser}"
+                     style="margin-bottom:0" paginator="true" rows="5" selectionPageOnly="false" width="15" 
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" >
+            		<p:column selectionMode="multiple" style="width:16px;text-align:center">
+            			<f:facet name="header">
+							
+						</f:facet>
+					</p:column>
+            		<p:column headerText="Nicks">
+                		<h:outputText value="#{n.nick}" />
+            		</p:column>
+            		
+            		
+            		
+            	</p:dataTable>
+            </div>
 
-			<p:commandButton value="Zapisz" action="#{userAdd.addTeam()}" style="margin: 1em auto;" update="@form" />
+			<p:commandButton value="Dodaj drużynę" action="#{userAdd.addTeam()}" style="margin: 1em auto;" update="@form" />
 			<p:commandButton value="Anuluj" style="margin-left: 5em;" outcome="index" />
 			<p:messages />	
 		</h:form>

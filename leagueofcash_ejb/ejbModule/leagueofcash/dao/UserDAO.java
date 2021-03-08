@@ -45,6 +45,23 @@ public class UserDAO {
 	}
 
 
+	
+	public User getUserFromView(String nick) {
+		
+		Query query = em.createQuery("SELECT u FROM User u WHERE u.nick = :nick",User.class);
+	    query.setParameter("nick", nick);
+	      
+	try {	
+		return(User)query.getSingleResult();
+		
+	} catch(NoResultException e) {
+		return null;
+	}
+		    
+	}
+	
+	
+	
 
 public User getUserFromDatabase(String login, String password) {
 		
