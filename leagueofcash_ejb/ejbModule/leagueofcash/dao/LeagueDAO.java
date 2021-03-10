@@ -45,7 +45,23 @@ public class LeagueDAO {
 	public League find(Object id) {
 		return em.find(League.class, id);
 	}
-
+	
+	//@Override
+	//public boolean equals(Object league) {
+	//    if (this == league)
+	//        return true;
+	//    if (league == null)
+	//        return false;
+	//    if (!(league instanceof League))//changed this from (getClass() != obj.getClass())
+	//        return false;
+	//    League other = (League) league;
+	 //   if (idLeague == 0) {
+	 //       if (other.getIdLeague() != 0)
+	//            return false;
+	 //   } else if (!league.equals(other.getIdLeague()))
+	 //       return false;
+	//    return true;
+	//}
 	
 	public League getLeagueFromDatabase(String name) {
 		League last = new League ();
@@ -66,7 +82,7 @@ public class LeagueDAO {
 	public List<League> getFullList() {
 		List<League> list = null;
 
-		Query query = em.createQuery("select l from League l order by name");
+		Query query = em.createQuery("select l from League l");
 
 		try {
 			list = query.getResultList();

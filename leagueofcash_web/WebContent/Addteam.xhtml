@@ -44,20 +44,18 @@
 				<div class="p-col-12 p-md-6 p-lg-3">
 				<h:outputLabel for="budget" value="Budżet:" />
 				<p:inputNumber id="budget" value="#{userAdd.team.budget}" decimalSeparator=","
-					thousandSeparator="." required="true" requiredMessage="Podaj budżet"
-					validatorMessage="co najwyżej 40 znaków">
+					thousandSeparator="." required="true" requiredMessage="Podaj budżet">
 					<f:validateLength maximum="400" />
 				</p:inputNumber>
 				<p:message for="budget" display="icon"/>
 				</div>
 				
 				<div class="p-col-12 p-md-6 p-lg-3">	
-				<h:outputLabel for="league" value="Liga:" />
-					<p:selectOneRadio id="league" value="#{userAdd.league.name}" required="true" unselectable="true" style="width:16px;text-align:center" requiredMessage="Wybierz ligę:">
-            			<f:selectItem itemLabel="Ultraliga" itemValue="Ultraliga"/>
-            			<f:selectItem itemLabel="LVP" itemValue="LVP"/>
-            			<f:selectItem itemLabel="LFL" itemValue="LFL"/>
-       			 	</p:selectOneRadio>
+				
+				<p:selectOneMenu id="league" converter="#{converterLeagueBean}" value="#{userAdd.team.league}" title="League">
+					<f:selectItems value="#{userAdd.leagueList}" var="liga" itemValue="#{liga}" itemLabel="#{liga.name}" />
+					
+				</p:selectOneMenu>
 					<p:message for="league" display="icon"/>
 				</div>
 				
@@ -65,7 +63,7 @@
             	</div>
 			</h:panelGrid>
 			<div class = "p-col-12 p-md-6 p-lg-3" >
-				<p:dataTable id="nick" var="n" value="#{userAdd.users}"
+				<p:dataTable id="nick" var="n" value="#{userAdd.lazyUserModel}" lazy="true"
                      selection="#{userAdd.selectedUser}" rowKey="#{n.idUser}"
                      style="margin-bottom:0" paginator="true" rows="5" selectionPageOnly="false" width="15" 
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" >

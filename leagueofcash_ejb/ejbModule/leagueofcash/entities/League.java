@@ -110,5 +110,10 @@ public class League implements Serializable {
 
 		return team;
 	}
+	
+    @Override
+    public boolean equals(Object obj) {
+    	return true;
+    }
 
 }

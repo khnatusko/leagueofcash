@@ -45,24 +45,6 @@ public class UserDAO {
 	}
 
 
-	
-	public User getUserFromView(String nick) {
-		
-		Query query = em.createQuery("SELECT u FROM User u WHERE u.nick = :nick",User.class);
-	    query.setParameter("nick", nick);
-	      
-	try {	
-		return(User)query.getSingleResult();
-		
-	} catch(NoResultException e) {
-		return null;
-	}
-		    
-	}
-	
-	
-	
-
 public User getUserFromDatabase(String login, String password) {
 		
 	Query query = em.createQuery("SELECT u FROM User u WHERE u.login = :login and u.password = :password",User.class);
@@ -77,10 +59,6 @@ try {
 	    
 }
 
-//public int getUsersAll() {
-//	Query query = em.createQuery("Select count(u.idUser) From User u");
-//	return ((Long)query.getSingleResult()).intValue();
-//}
 
 public List<User> getUsers(int offset, int pageSize){
 	List<User> user = null;
@@ -107,14 +85,6 @@ public int getRows() {
 	
 }
 
-public User getChargesDetails(int idUser) {
-	User u = em.find(User.class, idUser);
-	u.getCharges().size();
-	
-	return u;
-}
-
-
 
 public List<User> getFullList() {
 	List<User> list = null;
@@ -131,16 +101,43 @@ public List<User> getFullList() {
 }
 
 
+public List<User> getUsersView(int offset, int pageSize, int IDuser){
+	
+	Query query = em.createQuery("Select u From User u where idUser != :idUser").setParameter("idUser", IDuser );
+	query.setFirstResult(offset);
+	query.setMaxResults(pageSize);
+	try {
+		List<User> list = query.getResultList();
+		return list;
+	}catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+	return null;
+}
+
+public int countUsers(int IDuser) {
+	TypedQuery<Long> query = (TypedQuery<Long>) em
+			.createQuery("Select count(*) from User u where idUser != :idUser").setParameter("idUser", IDuser);
+	int i = 0;
+	try {
+		i = query.getSingleResult().intValue();
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	return i;
+}
+
+
 public List<User> getList(Map<String,Object> searchParams) {
 	List<User> list = null;
 
-	// 1. Build query string with parameters
 	String select = "select u ";
 	String from = "from User u ";
 	String where = "";
 	String orderby = "order by u.last_Name asc, u.name";
 
-	// search for surname
+
 	String last_Name = (String) searchParams.get("last_Name");
 	if (last_Name != null) {
 		if (where.isEmpty()) {
@@ -151,19 +148,14 @@ public List<User> getList(Map<String,Object> searchParams) {
 		where += "u.last_Name like :last_Name ";
 	}
 	
-	// ... other parameters ... 
 
-	// 2. Create query object
 	Query query = em.createQuery(select + from + where + orderby);
 		
-	// 3. Set configured parameters
+
 	if (last_Name != null) {
 		query.setParameter("last_Name", last_Name+"%");
 	}
 
-	// ... other parameters ... 
-
-	// 4. Execute query and retrieve list of Person objects
 	try {
 		list = query.getResultList();
 	} catch (Exception e) {

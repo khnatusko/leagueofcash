@@ -17,18 +17,13 @@ public class Team implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idteam;
-
 	private double budget;
-
 	private String shortCut;
-
 	private String title;
-	
-	
 
 	//bi-directional many-to-one association to League
-	@ManyToOne
-	@JoinTable(name="idLeague")
+	@ManyToOne(cascade = {CascadeType.MERGE})
+	@JoinColumn(name="League_idLeague")
 	private League league;
 
 	//bi-directional many-to-many association to User

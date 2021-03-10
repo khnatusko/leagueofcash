@@ -30,6 +30,7 @@
 /Addleague.xhtml: user, admin;
 /Addteam.xhtml: user, admin;
 /Editview.xhtml: user, admin;
+/Addcharge.xhtml: user, admin;
 			</param-value>
 		</init-param>
 		<init-param>

@@ -9,19 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Lista</title>
 </head>
-<ui:composition template="/templates/list-template.xhtml">
-<ui:define name="content">
-<h:form>
-<p:panel header="Opcje wyszukiwania" 
-		style="margin-bottom: 1em;">
-		
-			<h:panelGrid columns="2" cellpadding="5">
-				<h:outputLabel value="Nazwisko:" />
-				<p:inputText value="#{PaginatorView.last_Name}" />
-				<p:commandButton value="Szukaj" />
-			</h:panelGrid>
-			</p:panel>
-</h:form>
+<ui:composition template="/templates/page-template.xhtml">
+<ui:define name="pageContent">
+
     <h:form>
         <p:dataTable var="players" value="#{paginatorView.lazyModel}" rows="10"
                      paginator="true"

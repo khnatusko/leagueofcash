@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/page-template.xhtml">
+<ui:define name="pageContent">
+
+<f:metadata>
+	<f:viewAction action="#{userAdd.onLoad()}" />
+</f:metadata>
+
+<h:head>
+	<meta charset="utf-8"/>
+	
+</h:head>
+
+	<p:panel toggleable="true" header="Dodaj Płatność">
+
+		<h:form>
+			<h:panelGrid columns="4" cellpadding="3" styleClass="center-space">
+			<div class="p-grid">
+				<div class="p-col-12 p-md-6 p-lg-3">
+				<h:outputLabel for="salary" value="Pensja:" />
+				<p:inputNumber id="salary" value="#{userAdd.charge.salary}" decimalSeparator=","
+					thousandSeparator="." required="true" requiredMessage="Podaj budżet">
+					<f:validateLength maximum="400" />
+				</p:inputNumber>
+				<p:message for="salary" display="icon"/>
+				</div>
+				<div class="p-col-12 p-md-6 p-lg-3">
+				<h:outputLabel for="term" value="Początek kontraktu:" />
+				<p:inputText id="term" value="#{userAdd.charge.term}"
+					required="true" requiredMessage="podaj date podpisania">
+				<f:convertDateTime pattern="dd-MM-yyyy" />
+				</p:inputText>
+				<p:message for="term" display="icon"/>
+				</div>
+				
+				<div class="p-col-12 p-md-6 p-lg-3">
+				<h:outputLabel for="paid" value="Opłata:" />
+				<p:inputText id="paid" value="#{userAdd.charge.paid}" required="true" requiredMessage="Podaj budżet">
+					<f:validateLength maximum="400" />
+				</p:inputText>
+				<p:message for="paid" display="icon"/>
+				</div>
+				
+				<div class="p-col-12 p-md-6 p-lg-3">
+				<h:outputLabel for="contractEnd" value="Koniec kontraktu:" />
+				<p:inputText id="contractEnd" value="#{userAdd.charge.contractEnd}"
+					required="true" requiredMessage="podaj date wygaśnięcia kontraktu">
+				<f:convertDateTime pattern="dd-MM-yyyy" />
+				</p:inputText>
+				<p:message for="contractEnd" display="icon"/>
+				</div>
+				
+						
+            	</div>
+			</h:panelGrid>
+			<div class = "p-col-12 p-md-6 p-lg-3" >
+				<p:dataTable id="nick" var="n" value="#{userAdd.lazyUserModel}" lazy="true"
+                     selection="#{usereAdd.selectedUser}" rowKey="#{n.idUser}"
+                     styleClass="p-mt-2" paginator="true" rows="5" selectionPageOnly="false"  
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" >
+         
+            		<p:column headerText="Nicks">
+                		<h:outputText value="#{n.nick}" />
+            		</p:column>
+            		
+            		<p:column selectionMode="multiple" style="width:16px;text-align:center">
+            			<f:facet name="header">
+								
+						</f:facet>
+					</p:column>	
+            		
+            		
+            	</p:dataTable>
+            </div>
+
+			<p:commandButton value="Dodaj płatność" id="add" action="#{userAdd.addCharge()}" ajax="true" />
+			<p:commandButton value="Anuluj" style="margin-left: 5em;" outcome="index" />
+			<p:messages />
+			
+		</h:form>
+
+	</p:panel>
+
+
+</ui:define>
+</ui:composition>
+</html>

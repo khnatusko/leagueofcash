@@ -2,6 +2,8 @@ package leagueofcash.dao;
 
 
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -29,7 +31,7 @@ public class TeamDAO {
 	public Team merge(Team team) {
 		return em.merge(team);
 	}
-
+	
 	public void remove(Team team) {
 		em.remove(em.merge(team));
 	}
@@ -50,6 +52,37 @@ public class TeamDAO {
 		last = null;
 	}
 	return last;
+	}
+	
+	public List<Team> getTeams(int offset, int pageSize){
+		List<Team> team = null;
+		Query query = em.createQuery("Select t From Team t");
+		query.setFirstResult(offset);
+		query.setMaxResults(pageSize);
+		List<Team> list = query.getResultList();
+		return list;
+
+	}
+
+	public int getRows() {
+		int list = 0;
+		
+		Query query = em.createQuery("Select t From Team t");
+		
+		try {
+			list = query.getResultList().size();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+		
+	}
+	
+	public List<User> getUserList(Team team){
+		Team t = em.find(Team.class, team.getIdteam());
+		t.getUsers().size();
+		return t.getUsers();
 	}
 	
 	
